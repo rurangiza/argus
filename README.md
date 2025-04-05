@@ -1,2 +1,2 @@
-# alexandria
-Conversational search engine for your personal knowledge
+# Argus
+Conversational search tool for your personal knowledge
