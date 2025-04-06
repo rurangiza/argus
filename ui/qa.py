@@ -25,10 +25,9 @@ def send_query(messages: list[Message]):
 
 
 if 'messages' not in st.session_state:
-	st.session_state.messages = [{
-		"role": "assistant",
-		"content": "How can I help you?"
-	}]
+	st.session_state.messages = [
+		{'role': 'assistant', 'content': 'How can I help you?'}
+	]
 
 if 'conversation_id' not in st.session_state:
 	st.session_state.conversation_id = uuid()
