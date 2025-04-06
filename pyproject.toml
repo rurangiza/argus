@@ -24,6 +24,7 @@ pytest = "^8.3.5"
 mypy = "^1.15.0"
 python-dotenv = "^1.1.0"
 ruff = "^0.11.4"
+ipykernel = "^6.29.5"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

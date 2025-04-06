@@ -25,14 +25,16 @@ def send_query(messages: list[Message]):
 
 
 if 'messages' not in st.session_state:
-	st.session_state.messages = []
+	st.session_state.messages = [{
+		"role": "assistant",
+		"content": "How can I help you?"
+	}]
 
 if 'conversation_id' not in st.session_state:
 	st.session_state.conversation_id = uuid()
 
 
-st.markdown('# Argus')
-st.markdown('### A conversational tool for your personal knowledge')
+st.markdown('# Q&A')
 
 for message in st.session_state.messages:
 	with st.chat_message(message['role']):
@@ -48,4 +50,4 @@ if prompt := st.chat_input('Ask anything'):
 		{'role': 'assistant', 'content': answer['message']}
 	)
 	with st.chat_message('assistant'):
-		st.markdown(answer['message'])
+		st.write(answer['message'])

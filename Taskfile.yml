@@ -14,7 +14,7 @@ tasks:
       - uvicorn app.main:app --reload
   client:
     cmds:
-      - streamlit run client.py
+      - streamlit run ui/entrypoint.py
   test:
     cmds:
       - ruff check # linter and formatter
