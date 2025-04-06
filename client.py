@@ -48,4 +48,4 @@ if prompt := st.chat_input('Ask anything'):
 		{'role': 'assistant', 'content': answer['message']}
 	)
 	with st.chat_message('assistant'):
-		st.markdown(answer)
+		st.markdown(answer['message'])
