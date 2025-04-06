@@ -8,7 +8,7 @@ app = FastAPI()
 app.include_router(chat.router)
 
 
-@app.get("/")
+@app.get('/')
 async def hello() -> dict[str, str]:
-    """Return a simple hello world message."""
-    return {"message": "Hello, world"}
+	"""Return a simple hello world message."""
+	return {'message': 'Hello, world'}

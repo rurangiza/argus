@@ -9,12 +9,17 @@ tasks:
   default:
     cmds:
       - echo "{{.GREETING}}"
-    silent: true
-  run-local:
+  api:
     cmds:
-      - fastapi dev "{{.ENTRYPOINT}}"
+      - uvicorn app.main:app --reload
+  client:
+    cmds:
+      - streamlit run client.py
   test:
     cmds:
-      - pylint app/** # style
+      - ruff check # linter and formatter
       - mypy app # type checker
       - pytest # unit test
+  format:
+    cmds:
+      - ruff format
