@@ -10,12 +10,16 @@ class ToolsRegistry:
 	tools: dict = defaultdict()
 
 	@classmethod
-	def get_descriptions(cls):
-		return [v['description'] for _, v in cls.tools.items()]
-
-	@classmethod
-	def get_all(cls):
-		return cls.tools
+	def filter(cls, userEnabledTools: list):
+		tool_selection: dict = {
+			name: info for name, info in cls.tools.items() if name in userEnabledTools
+		}
+		if not tool_selection:
+			return [None, None]
+		return [
+			tool_selection,
+			[info['description'] for _, info in tool_selection.items()],
+		]
 
 
 def generate_openai_tool_description(func_name, descriptions: ToolDescription):

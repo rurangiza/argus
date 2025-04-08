@@ -16,8 +16,7 @@ client = OpenAI(api_key=settings.openai_api_key)
 @router.post('/')
 async def invoke(request: ChatRequest):
 	messages = request.messages
-	all_tools = ToolsRegistry.get_all()
-	tools_descriptions = ToolsRegistry.get_descriptions()
+	available_tools, tools_descriptions = ToolsRegistry.filter(request.tools)
 
 	completion = client.chat.completions.create(
 		messages=messages,
@@ -34,7 +33,7 @@ async def invoke(request: ChatRequest):
 			chosen_function = tool.function.name
 			args = json.loads(tool.function.arguments)
 
-			result = all_tools[chosen_function]['function'](**args)
+			result = available_tools[chosen_function]['function'](**args)
 
 			messages.append(
 				{'role': 'tool', 'tool_call_id': tool.id, 'content': str(result)}

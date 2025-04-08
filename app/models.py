@@ -9,6 +9,7 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
 	messages: list[Message]
+	tools: list[str]
 
 
 class Note(BaseModel):
