@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   GREETING: Hello, World!
-  ENTRYPOINT: app/main.py
+  ENTRYPOINT: src/argus/main.py
   VENV: poetry env info --path
 
 tasks:
@@ -11,15 +11,16 @@ tasks:
       - echo "{{.GREETING}}"
   api:
     cmds:
-      - uvicorn app.main:app --reload
+      - poetry run fastapi dev src/argus/main.py --reload
   client:
     cmds:
       - streamlit run ui/entrypoint.py
   test:
     cmds:
-      - ruff check # linter and formatter
-      - mypy app # type checker
-      - pytest # unit test
+      - poetry run pytest # unit test
+      - poetry run mypy src/argus # type checker
+      - poetry run ruff format src/ tests/ --check # linter and formatter
+      - poetry run ruff check src/ tests/ --select I,F,S,W,E # linter and formatter
   format:
     cmds:
-      - ruff format
+      - poetry run ruff format src/ tests/
